@@ -37,3 +37,5 @@ gem "spring-commands-rspec", "~> 1.0", group: :development
 gem "factory_bot_rails", "~> 6.5", groups: [:development, :test]
 
 gem "shoulda-matchers", "~> 7.0", group: :test
+
+gem "faker", "~> 3.6", groups: [:development, :test]

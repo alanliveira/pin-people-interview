@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_20_152153) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_21_144235) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_20_152153) do
     t.string "email"
     t.string "gender"
     t.string "generation"
+    t.bigint "level_area_id", null: false
+    t.bigint "level_coordination_id", null: false
+    t.bigint "level_directorate_id", null: false
+    t.bigint "level_management_id", null: false
     t.string "location"
     t.string "name"
     t.string "phone_number"
@@ -48,6 +52,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_20_152153) do
     t.index ["company_function_id"], name: "index_employees_on_company_function_id"
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["company_position_id"], name: "index_employees_on_company_position_id"
+    t.index ["level_area_id"], name: "index_employees_on_level_area_id"
+    t.index ["level_coordination_id"], name: "index_employees_on_level_coordination_id"
+    t.index ["level_directorate_id"], name: "index_employees_on_level_directorate_id"
+    t.index ["level_management_id"], name: "index_employees_on_level_management_id"
   end
 
   add_foreign_key "company_roles", "companies"
@@ -55,4 +63,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_20_152153) do
   add_foreign_key "employees", "company_roles", column: "company_department_id"
   add_foreign_key "employees", "company_roles", column: "company_function_id"
   add_foreign_key "employees", "company_roles", column: "company_position_id"
+  add_foreign_key "employees", "company_roles", column: "level_area_id"
+  add_foreign_key "employees", "company_roles", column: "level_coordination_id"
+  add_foreign_key "employees", "company_roles", column: "level_directorate_id"
+  add_foreign_key "employees", "company_roles", column: "level_management_id"
 end

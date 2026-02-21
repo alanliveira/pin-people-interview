@@ -38,8 +38,7 @@ RSpec.describe CsvImportService, type: :service do
 
   describe '.call' do
     it { expect(subject.call(path: filepath, headers: headers)).to be_kind_of(CsvImportService) }
-    it { expect(subject.call(path: '', headers: headers)).to eq("Arquivo não encontrado: #{path}") }
-
+    it { expect(subject.call(path: '', headers: headers)).to eq("Arquivo não encontrado: ") }
     describe '#count' do
       it { expect(subject.call(path: filepath, headers: headers).count).to eq(500) }
     end

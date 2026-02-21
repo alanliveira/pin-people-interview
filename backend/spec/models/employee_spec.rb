@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Employee, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'associations' do
+    it { should belong_to(:company) }
+    it { should belong_to(:company_department) }
+    it { should belong_to(:company_function) }
+    it { should belong_to(:company_position) }
+  end
 end

@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_21_144235) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_23_153558) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.bigint "question_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "value"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -58,6 +67,34 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_144235) do
     t.index ["level_management_id"], name: "index_employees_on_level_management_id"
   end
 
+  create_table "question_answers", force: :cascade do |t|
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.bigint "employee_id", null: false
+    t.bigint "search_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_question_answers_on_employee_id"
+    t.index ["search_id"], name: "index_question_answers_on_search_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.bigint "search_id", null: false
+    t.string "type"
+    t.datetime "updated_at", null: false
+    t.index ["search_id"], name: "index_questions_on_search_id"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_searches_on_company_id"
+  end
+
+  add_foreign_key "answers", "questions"
   add_foreign_key "company_roles", "companies"
   add_foreign_key "employees", "companies"
   add_foreign_key "employees", "company_roles", column: "company_department_id"
@@ -67,4 +104,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_144235) do
   add_foreign_key "employees", "company_roles", column: "level_coordination_id"
   add_foreign_key "employees", "company_roles", column: "level_directorate_id"
   add_foreign_key "employees", "company_roles", column: "level_management_id"
+  add_foreign_key "question_answers", "employees"
+  add_foreign_key "question_answers", "searches"
+  add_foreign_key "questions", "searches"
+  add_foreign_key "searches", "companies"
 end

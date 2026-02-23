@@ -12,9 +12,9 @@ FactoryBot.define do
     company_tenure { [ "before 1 year", "between 1 and 2 years", "between 2 and 5 years", "more than 5 years" ].sample }
 
     after(:build) do |employee|
-      employee.department         ||= build(:company_department, company: employee.company)
-      employee.position           ||= build(:company_position, company: employee.company)
-      employee.function           ||= build(:company_function, company: employee.company)
+      employee.company_department ||= build(:company_department, company: employee.company)
+      employee.company_function   ||= build(:company_function, company: employee.company)
+      employee.company_position   ||= build(:company_position, company: employee.company)
       employee.level_area         ||= build(:level_area, company: employee.company)
       employee.level_directorate  ||= build(:level_directorate, company: employee.company)
       employee.level_management   ||= build(:level_management, company: employee.company)

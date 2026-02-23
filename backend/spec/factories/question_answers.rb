@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :question_answer do
-    search
-    employee
+    association :search
+    association :employee
 
     completed_at { DateTime.current }
 

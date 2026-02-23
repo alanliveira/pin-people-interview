@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :employee do
-    company
+    association :company
 
     name { Faker::Name.name }
     email { Faker::Internet.email }

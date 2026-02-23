@@ -42,4 +42,6 @@ gem "faker", "~> 3.6", groups: [ :development, :test ]
 
 gem "simplecov", "~> 0.22.0", groups: [ :development, :test ]
 
-gem "rubycritic", "~> 5.0", groups: [:development, :test]
+gem "rubycritic", "~> 5.0", groups: [ :development, :test ]
+
+gem "csv", "~> 3.3"

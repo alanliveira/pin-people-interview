@@ -15,5 +15,17 @@ RSpec.describe Company, type: :model do
     it { is_expected.to have_many(:departments).dependent(:destroy) }
     it { is_expected.to have_many(:functions) }
     it { is_expected.to have_many(:functions).dependent(:destroy) }
+
+    it { is_expected.to have_many(:employees) }
+    it { is_expected.to have_many(:employees).dependent(:destroy) }
+
+    it { is_expected.to have_many(:directorates) }
+    it { is_expected.to have_many(:directorates).dependent(:destroy) }
+    it { is_expected.to have_many(:managements) }
+    it { is_expected.to have_many(:managements).dependent(:destroy) }
+    it { is_expected.to have_many(:coordinations) }
+    it { is_expected.to have_many(:coordinations).dependent(:destroy) }
+    it { is_expected.to have_many(:areas) }
+    it { is_expected.to have_many(:areas).dependent(:destroy) }
   end
 end

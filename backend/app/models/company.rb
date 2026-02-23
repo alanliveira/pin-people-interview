@@ -14,5 +14,25 @@ class Company < ApplicationRecord
   has_many :employees,
            dependent: :destroy
 
+  has_many :directorates,
+            class_name: "LevelDirectorate",
+            foreign_key: "company_id",
+            dependent: :destroy
+
+  has_many :managements,
+            class_name: "LevelManagement",
+            foreign_key: "company_id",
+            dependent: :destroy
+
+  has_many :coordinations,
+            class_name: "LevelCoordination",
+            foreign_key: "company_id",
+            dependent: :destroy
+
+  has_many :areas,
+            class_name: "LevelArea",
+            foreign_key: "company_id",
+            dependent: :destroy
+
   validates :name, presence: true
 end

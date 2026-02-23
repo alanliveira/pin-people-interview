@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_23_153558) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_23_164031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "answers", force: :cascade do |t|
     t.text "comment"
     t.datetime "created_at", null: false
+    t.bigint "question_answer_id", null: false
     t.bigint "question_id", null: false
     t.datetime "updated_at", null: false
     t.integer "value"
+    t.index ["question_answer_id"], name: "index_answers_on_question_answer_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
@@ -56,6 +58,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_23_153558) do
     t.string "location"
     t.string "name"
     t.string "phone_number"
+    t.string "time_in_company"
     t.datetime "updated_at", null: false
     t.index ["company_department_id"], name: "index_employees_on_company_department_id"
     t.index ["company_function_id"], name: "index_employees_on_company_function_id"
@@ -94,6 +97,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_23_153558) do
     t.index ["company_id"], name: "index_searches_on_company_id"
   end
 
+  add_foreign_key "answers", "question_answers"
   add_foreign_key "answers", "questions"
   add_foreign_key "company_roles", "companies"
   add_foreign_key "employees", "companies"

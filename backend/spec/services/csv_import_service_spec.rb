@@ -4,43 +4,29 @@ RSpec.describe CsvImportService, type: :service do
   subject { CsvImportService }
 
   let(:filepath) { Rails.root.join("db", "data.csv") }
-  let(:headers) { [ "nome",
-                    "email",
-                    "email_corporativo",
-                    "area",
-                    "cargo",
-                    "funcao",
-                    "localidade",
-                    "tempo_de_empresa",
-                    "genero", "geracao",
-                    "n0_empresa",
-                    "n1_diretoria",
-                    "n2_gerencia",
-                    "n3_coordenacao",
-                    "n4_area",
-                    "Data da Resposta",
-                    "Interesse no Cargo",
-                    "Comentários - Interesse no Cargo",
-                    "Contribuição",
-                    "Comentários - Contribuição",
-                    "Aprendizado e Desenvolvimento",
-                    "Comentários - Aprendizado e Desenvolvimento",
-                    "Feedback",
-                    "Comentários - Feedback",
-                    "Interação com Gestor",
-                    "Comentários - Interação com Gestor",
-                    "Clareza sobre Possibilidades de Carreira",
-                    "Comentários - Clareza sobre Possibilidades de Carreira",
-                    "Expectativa de Permanência",
-                    "Comentários - Expectativa de Permanência",
-                    "eNPS",
-                    "[Aberta] eNPS" ]}
 
-  describe '.call' do
-    it { expect(subject.call(path: filepath, headers: headers)).to be_kind_of(CsvImportService) }
-    it { expect(subject.call(path: '', headers: headers)).to eq("Arquivo não encontrado: ") }
-    describe '#count' do
-      it { expect(subject.call(path: filepath, headers: headers).count).to eq(500) }
+  context '.call' do
+    let!(:import) { subject.call(path: filepath, steps: 100) }
+
+    context 'when file exists' do
+      it { expect(import).to be_kind_of(Hash) }
+      it { expect(import[:status]).to eq(:success) }
+      it { expect(import[:message]).to eq("Import completed successfully.") }
+    end
+
+    context 'when file does not exist' do
+      it { expect(subject.call(path: '')).to be_kind_of(Hash) }
+      it { expect(subject.call(path: '')[:status]).to eq(:error) }
+      it { expect(subject.call(path: '')[:message]).to eq("File not found: ") }
+    end
+
+    context 'when persisted in database' do
+      it { expect(Company.count).to eq(1) }
+      it { expect(Employee.count).to eq(100) }
+      it { expect(QuestionAnswer.count).to eq(100) }
+      it { expect(Search.count).to eq(1) }
+      it { expect(Question.count).to eq(8) }
+      it { expect(Answer.count).to eq(800) }
     end
   end
 end

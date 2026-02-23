@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :level_management do
-    company
+    association :company
 
     name { Faker::Company.industry }
     role_type { "management" }

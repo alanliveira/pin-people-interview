@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :company_function do
-    company
+    association :company
 
     name { Faker::Job.seniority  }
     role_type { 'function' }

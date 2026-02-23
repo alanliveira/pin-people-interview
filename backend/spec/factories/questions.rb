@@ -3,6 +3,6 @@ FactoryBot.define do
     search
 
     description { Faker::Lorem.paragraph }
-    type { %w[linked text].sample }
+    question_type { %w[text likert nps].sample }
   end
 end

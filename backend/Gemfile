@@ -45,3 +45,8 @@ gem "simplecov", "~> 0.22.0", groups: [ :development, :test ]
 gem "rubycritic", "~> 5.0", groups: [ :development, :test ]
 
 gem "csv", "~> 3.3"
+
+gem "rswag-specs", "~> 2.17", groups: [:development, :test]
+
+gem "rswag-api", "~> 2.17"
+gem "rswag-ui", "~> 2.17"

@@ -1,0 +1,7 @@
+http://localhost:3000/v1/searches
+Accept: application/json
+
+###
+
+http://localhost:3000/v1/searches/1
+Accept: application/json
